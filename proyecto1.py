@@ -47,7 +47,7 @@ for line in contenido[1:]:
     # Añadimos la fila procesada a nuestra lista de datos
     data.append(row)
 
-    # Transferir los datos a un DataFrame
+# Transferir los datos a un DataFrame
 df = pd.DataFrame(data, columns=headers)
 
 # Imprimir el DataFrame para verificar
@@ -59,7 +59,7 @@ column_types = {
     'Identifier': 'int',
     'Edition Statement': 'string',
     'Place of Publication': 'string',
-    'Date of Publication': 'int',  
+    'Date of Publication': 'Int64',  
     'Publisher': 'string',
     'Title': 'string',
     'Author': 'string',
@@ -72,13 +72,6 @@ column_types = {
     'Flickr URL': 'string',
     'Shelfmarks': 'string'
 }
-
-for column, dtype in column_types.items():
-    if column in df.columns:
-        if dtype == 'int':
-            df[column] = pd.to_numeric(df[column], errors='coerce').astype('Int64')
-        else:
-            df[column] = df[column].astype(str)
 
 # Mostrar el DataFrame con pandasgui
 show(df)
