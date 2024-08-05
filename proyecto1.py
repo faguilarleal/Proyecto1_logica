@@ -42,5 +42,3 @@ for line in contenido[1:]:
     
     # Añadimos la fila procesada a nuestra lista de datos
     data.append(row)
-
-print(data)
