@@ -47,6 +47,10 @@ for line in contenido[1:]:
     # Añadimos la fila procesada a nuestra lista de datos
     data.append(row)
 
+    # Imprimir las primeras 5 filas procesadas para verificar
+    if len(data) <= 5:
+        print(f"Fila {len(data)} procesada:", row)
+
 # Transferir los datos a un DataFrame
 df = pd.DataFrame(data, columns=headers)
 
