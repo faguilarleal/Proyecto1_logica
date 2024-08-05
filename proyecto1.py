@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+from pandasgui import show
 
 #leer el archivo
 def leerArchivo():
@@ -15,6 +16,9 @@ header_line = contenido[0].strip()
 
 # Usamos una expresión regular para separar los nombres de las columnas por comas
 headers = re.findall(r'[^,]+', header_line)
+
+# Imprimir los encabezados para verificar
+print("Encabezados extraídos:", headers)
 
 # Aquí es donde vamos a guardar cada fila de datos del archivo, una por una
 data = []
@@ -42,3 +46,39 @@ for line in contenido[1:]:
     
     # Añadimos la fila procesada a nuestra lista de datos
     data.append(row)
+
+    # Transferir los datos a un DataFrame
+df = pd.DataFrame(data, columns=headers)
+
+# Imprimir el DataFrame para verificar
+print("DataFrame creado:")
+print(df.head())
+
+# Asignar tipos de datos específicos a cada columna según los encabezados reales
+column_types = {
+    'Identifier': 'int',
+    'Edition Statement': 'string',
+    'Place of Publication': 'string',
+    'Date of Publication': 'int',  
+    'Publisher': 'string',
+    'Title': 'string',
+    'Author': 'string',
+    'Contributors': 'string',
+    'Corporate Author': 'string',
+    'Corporate Contributors': 'string',
+    'Former owner': 'string',
+    'Engraver': 'string',
+    'Issuance type': 'string',
+    'Flickr URL': 'string',
+    'Shelfmarks': 'string'
+}
+
+for column, dtype in column_types.items():
+    if column in df.columns:
+        if dtype == 'int':
+            df[column] = pd.to_numeric(df[column], errors='coerce').astype('Int64')
+        else:
+            df[column] = df[column].astype(str)
+
+# Mostrar el DataFrame con pandasgui
+show(df)
