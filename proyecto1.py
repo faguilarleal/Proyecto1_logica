@@ -21,7 +21,7 @@ data = []
 
 # Esta es la expresión regular que nos ayudará a dividir cada línea en campos
 # Básicamente busca comas que están al inicio o entre campos y separa valores que están entre comillas o no
-pattern = r'(?:,|^)(?:"([^"])"|([^",]))'
+pattern = r'(?:^|,)(?:"([^"]*)"|([^",]*))'
 
 # Ahora recorremos cada línea del contenido a partir de la segunda (ya que la primera es el encabezado)
 for line in contenido[1:]:
@@ -42,3 +42,5 @@ for line in contenido[1:]:
     
     # Añadimos la fila procesada a nuestra lista de datos
     data.append(row)
+
+print(data)
